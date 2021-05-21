@@ -1,5 +1,4 @@
 import { commands, isDefaultCommand } from "../commands";
-import clsx from "clsx";
 import Head from "next/head";
 import { NamedCommand } from "../commands/type";
 
