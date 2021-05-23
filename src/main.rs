@@ -8,10 +8,14 @@ use crate::command::BunnyCommand;
 mod command;
 mod web;
 
-const PORT: i32 = 8090;
+const PORT: i32 = 8080;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    let bind = format!("0.0.0.0:{}", PORT);
+    // let bind = format!("127.0.0.1:{}", PORT);
+    println!("Running on \"{}\"", bind);
+
     HttpServer::new(|| {
         let command_table = generate_bunny_table();
         App::new()
@@ -30,7 +34,7 @@ async fn main() -> std::io::Result<()> {
             .service(search)
     })
     // .workers(1)
-    .bind(format!("127.0.0.1:{}", PORT))?
+    .bind(bind)?
     .run()
     .await
 }
